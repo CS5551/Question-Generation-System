@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Subscription} from "rxjs";
+import {QuestionService} from "../services/question.service";
 
 @Component({
   selector: 'app-list',
@@ -6,34 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  public items: Array<{ question: string; type: string, difficulty: any, subject: string }> = [];
+  private questionsSubscr: Subscription;
+
+  constructor(private questionService: QuestionService) {
+
+
   }
 
   ngOnInit() {
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
+
+  ionViewWillEnter() {
+    console.log('Home will enter');
+    this.questionsSubscr = this.questionService.getQuestions().subscribe(res => {
+      if (res.length !== 0) {
+        for (let i = 0; i < res.length; i++) {
+          this.items.push({
+            question: res[i].question,
+            type: res[i].type,
+            difficulty: res[i].difficulty,
+            subject: res[i].subject,
+          });
+        }
+      }
+    });
+  }
+
+  ionViewWillLeave() {
+    this.questionsSubscr.unsubscribe();
+  }
 }
