@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
 
 export interface Question {
@@ -10,6 +9,7 @@ export interface Question {
   type: string;
   difficulty: any;
   subject: string;
+  choices: Array<string>
 }
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,7 @@ export class QuestionService {
             type: value.type,
             difficulty: value.difficulty,
             subject: value.subject,
+            choices: value.type === 'Choice' ? value.choices : [],
           })
           .then(
               res => resolve(res),

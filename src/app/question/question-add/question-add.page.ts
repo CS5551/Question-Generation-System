@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuestionService} from "../../services/question.service";
 import {AlertController, NavController} from "@ionic/angular";
 
@@ -12,6 +12,8 @@ export class QuestionAddPage implements OnInit {
   types: Array<string>;
   difficulties: Array<any>;
 
+  choices: FormArray;
+
   validations_form: FormGroup;
   validation_messages = {
     question: [
@@ -22,6 +24,9 @@ export class QuestionAddPage implements OnInit {
     ],
     subject: [
       {type: 'required', message: 'Subject is required'},
+    ],
+    choices: [
+      {type: 'required', message: 'Answers are required'},
     ],
     difficulty: [
       {type: 'selectType', message: 'Please select difficulty'}
@@ -58,6 +63,7 @@ export class QuestionAddPage implements OnInit {
         Validators.required,
         // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
+      choices: this.formBuilder.array([ this.createItem(), this.createItem() ]),
       difficulty: new FormControl(this.difficulties[0], Validators.compose([
         Validators.required,
       ])),
@@ -66,6 +72,24 @@ export class QuestionAddPage implements OnInit {
         selectType('type'),
         selectType('difficulty')]
     });
+  }
+
+  createItem(): FormGroup {
+    return this.formBuilder.group({
+      choice: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+    });
+  }
+
+  addItem(): void {
+    this.choices = this.validations_form.get('choices') as FormArray;
+    this.choices.push(this.createItem());
+  }
+
+  removeItem(index) {
+    this.choices = this.validations_form.get('choices') as FormArray;
+    this.choices.removeAt(index);
   }
 
   async presentAlert(title: string, value: string) {
