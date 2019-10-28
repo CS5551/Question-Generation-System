@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      List of Papers
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        Title
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        Number of Questions
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        Difficulty
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        Options
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of papers">
+      <ion-col size="4">
+        {{item.title}}
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        {{item.questions.length}}
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        {{item.difficulty}}
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-button size="small" [routerLink]="['/question-edit', item.id]" routerDirection="forward">
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button size="small" (click)="deletePaper(item)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

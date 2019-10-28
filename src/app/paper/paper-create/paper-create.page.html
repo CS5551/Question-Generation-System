@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create Paper</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="createPaper(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Title</ion-label>
+      <ion-input type="text" formControlName="title" class="form-control" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.title">
+        <div class="error-message" *ngIf="validations_form.get('title').hasError(validation.type) && (validations_form.get('title').dirty || validations_form.get('title').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Difficulty</ion-label>
+      <ion-select formControlName="difficulty" cancelText="Cancel" okText="OK">
+        <ion-select-option *ngFor="let type of difficulties" [value]="type">{{type}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.difficulty">
+        <div class="error-message" *ngIf="validations_form.get('difficulty').hasError(validation.type) && (validations_form.get('difficulty').dirty || validations_form.get('difficulty').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Number of Questions</ion-label>
+      <ion-input type="number" formControlName="numQuestions" class="form-control" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.numQuestions">
+        <div class="error-message" *ngIf="validations_form.get('numQuestions').hasError(validation.type) && (validations_form.get('numQuestions').dirty || validations_form.get('numQuestions').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <p>
+      <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Create Paper</ion-button>
+    </p>
+  </form>
+</ion-content>

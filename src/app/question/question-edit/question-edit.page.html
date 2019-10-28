@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Edit Question</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="updateQuestion(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Question</ion-label>
+      <ion-textarea type="text" formControlName="question" class="form-control" required></ion-textarea>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.question">
+        <div class="error-message" *ngIf="validations_form.get('question').hasError(validation.type) && (validations_form.get('question').dirty || validations_form.get('question').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Subject</ion-label>
+      <ion-input type="text" formControlName="subject" class="form-control" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.subject">
+        <div class="error-message" *ngIf="validations_form.get('subject').hasError(validation.type) && (validations_form.get('subject').dirty || validations_form.get('subject').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Difficulty</ion-label>
+      <ion-select formControlName="difficulty" cancelText="Cancel" okText="OK">
+        <ion-select-option *ngFor="let type of difficulties" [value]="type">{{type}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.type">
+        <div class="error-message" *ngIf="validations_form.get('difficulty').hasError(validation.type) && (validations_form.get('difficulty').dirty || validations_form.get('difficulty').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Type</ion-label>
+      <ion-select disabled="true" formControlName="type" cancelText="Cancel" okText="OK">
+        <ion-select-option *ngFor="let type of types" [value]="type">{{type}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.type">
+        <div class="error-message" *ngIf="validations_form.get('type').hasError(validation.type) && (validations_form.get('type').dirty || validations_form.get('type').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <div *ngIf="validations_form.get('type').value === 'Choice'; else chooseTextType">
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Choices</ion-label>
+        </ion-item-divider>
+        <div formArrayName="choices" *ngFor="let control of validations_form.get('choices').controls; let i = index;">
+          <ion-item [formGroupName]="i.toString()">
+            <ion-label position="stacked" color="primary">Choice {{i+1}}</ion-label>
+            <ion-input type="text" formControlName="choice" class="form-control" required></ion-input>
+            <ion-button slot="end" (click)="removeItem(i)">
+              <ion-icon name="remove"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </div>
+
+        <ion-button (click)="addItem('')">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-item-group>
+    </div>
+    <ng-template #chooseTextType>
+      {{removeChoices()}}
+    </ng-template>
+
+    <p>
+      <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Save</ion-button>
+    </p>
+  </form>
+</ion-content>
