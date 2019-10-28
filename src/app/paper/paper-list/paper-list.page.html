@@ -12,7 +12,7 @@
 
 <ion-content class="ion-padding">
   <ion-grid>
-    <ion-row>
+    <ion-row style="background-color: rgba(0, 0, 0, 0.1)">
       <ion-col size="4">
         Title
       </ion-col>
@@ -26,7 +26,7 @@
         Options
       </ion-col>
     </ion-row>
-    <ion-row *ngFor="let item of papers">
+    <ion-row *ngFor="let item of papers; let i = index;" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
       <ion-col size="4">
         {{item.title}}
       </ion-col>
@@ -37,9 +37,9 @@
         {{item.difficulty}}
       </ion-col>
       <ion-col size="2" class="ion-text-center">
-        <ion-button size="small" [routerLink]="['/question-edit', item.id]" routerDirection="forward">
-          <ion-icon name="create"></ion-icon>
-        </ion-button>
+<!--        <ion-button size="small" [routerLink]="['/question-edit', item.id]" routerDirection="forward">-->
+<!--          <ion-icon name="create"></ion-icon>-->
+<!--        </ion-button>-->
         <ion-button size="small" (click)="deletePaper(item)">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
