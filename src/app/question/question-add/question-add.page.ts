@@ -12,8 +12,6 @@ export class QuestionAddPage implements OnInit {
   types: Array<string>;
   difficulties: Array<any>;
 
-  choices: FormArray;
-
   validations_form: FormGroup;
   validation_messages = {
     question: [
@@ -25,9 +23,7 @@ export class QuestionAddPage implements OnInit {
     subject: [
       {type: 'required', message: 'Subject is required'},
     ],
-    choices: [
-      {type: 'required', message: 'Answers are required'},
-    ],
+    choices: [],
     difficulty: [
       {type: 'selectType', message: 'Please select difficulty'}
     ],
@@ -54,16 +50,14 @@ export class QuestionAddPage implements OnInit {
     this.validations_form = this.formBuilder.group({
       question: new FormControl('', Validators.compose([
         Validators.required,
-        // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
       type: new FormControl(this.types[0], Validators.compose([
         Validators.required,
       ])),
       subject: new FormControl('', Validators.compose([
         Validators.required,
-        // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      choices: this.formBuilder.array([ this.createItem(), this.createItem() ]),
+      choices: this.formBuilder.array([]),
       difficulty: new FormControl(this.difficulties[0], Validators.compose([
         Validators.required,
       ])),
@@ -83,13 +77,18 @@ export class QuestionAddPage implements OnInit {
   }
 
   addItem(): void {
-    this.choices = this.validations_form.get('choices') as FormArray;
-    this.choices.push(this.createItem());
+    const choices = this.validations_form.get('choices') as FormArray;
+    choices.push(this.createItem());
   }
 
   removeItem(index) {
-    this.choices = this.validations_form.get('choices') as FormArray;
-    this.choices.removeAt(index);
+    const choices = this.validations_form.get('choices') as FormArray;
+    choices.removeAt(index);
+  }
+
+  removeChoices() {
+    const choices = this.validations_form.get('choices') as FormArray;
+    choices.clear();
   }
 
   async presentAlert(title: string, value: string) {
@@ -104,14 +103,14 @@ export class QuestionAddPage implements OnInit {
 
   createQuestion(value) {
     this.questionService.createQuestion(value)
-        .then(res => {
-          console.log(res);
-          this.presentAlert('Success', 'Your question has been created.');
-          this.navCtrl.navigateBack('list');
-        }, err => {
-          console.log(err);
-          this.presentAlert('Error', err.message);
-        });
+    .then(res => {
+      console.log(res);
+      this.presentAlert('Success', 'Your question has been created.');
+      this.navCtrl.navigateBack('list');
+    }, err => {
+      console.log(err);
+      this.presentAlert('Error', err.message);
+    });
   }
 
 }

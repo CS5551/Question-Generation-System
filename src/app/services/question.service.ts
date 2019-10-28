@@ -9,8 +9,9 @@ export interface Question {
   type: string;
   difficulty: any;
   subject: string;
-  choices: Array<string>
+  choices: Array<any>;
 }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,17 +27,17 @@ export class QuestionService {
       const questionsCollection = usersCollection.doc(currentUser.uid).collection<Question>('questions');
 
       questionsCollection
-          .add({
-            question: value.question,
-            type: value.type,
-            difficulty: value.difficulty,
-            subject: value.subject,
-            choices: value.type === 'Choice' ? value.choices : [],
-          })
-          .then(
-              res => resolve(res),
-              err => reject(err)
-          );
+        .add({
+          question: value.question,
+          type: value.type,
+          difficulty: value.difficulty,
+          subject: value.subject,
+          choices: value.type === 'Choice' ? value.choices : [],
+        })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      );
     });
   }
 
@@ -54,5 +55,49 @@ export class QuestionService {
         });
       })
     );
+  }
+
+  getQuestion(id: string) {
+    const currentUser = firebase.auth().currentUser;
+    const usersCollection = this.db.collection('users');
+    const questionsCollection = usersCollection.doc(currentUser.uid).collection<Question>('questions');
+
+    return questionsCollection.doc<Question>(id).valueChanges();
+  }
+
+  updateQuestion(value, questionId: string) {
+    return new Promise<any>((resolve, reject) => {
+      const currentUser = firebase.auth().currentUser;
+      const usersCollection = this.db.collection('users');
+      const questionsCollection = usersCollection.doc(currentUser.uid).collection<Question>('questions');
+
+
+      questionsCollection.doc(questionId)
+      .update({
+        question: value.question,
+        type: value.type,
+        difficulty: value.difficulty,
+        subject: value.subject,
+        choices: value.type === 'Choice' ? value.choices : [],
+      })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      );
+    });
+  }
+
+  deleteQuestion(questionId) {
+    const currentUser = firebase.auth().currentUser;
+    const usersCollection = this.db.collection('users');
+    const questionsCollection = usersCollection.doc(currentUser.uid).collection<Question>('questions');
+
+    return new Promise<any>((resolve, reject) => {
+      questionsCollection.doc(questionId).delete()
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      );
+    });
   }
 }

@@ -12,7 +12,7 @@
 
     <ion-item>
       <ion-label position="stacked" color="primary">Question</ion-label>
-      <ion-input type="text" formControlName="question" class="form-control" required></ion-input>
+      <ion-textarea type="text" formControlName="question" class="form-control" required></ion-textarea>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.question">
@@ -41,7 +41,7 @@
       </ion-select>
     </ion-item>
     <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.type">
+      <ng-container *ngFor="let validation of validation_messages.difficulty">
         <div class="error-message" *ngIf="validations_form.get('difficulty').hasError(validation.type) && (validations_form.get('difficulty').dirty || validations_form.get('difficulty').touched)">
           {{ validation.message }}
         </div>
@@ -62,7 +62,7 @@
       </ng-container>
     </div>
 
-    <div *ngIf="validations_form.get('type').value === 'Choice'">
+    <div *ngIf="validations_form.get('type').value === 'Choice'; else chooseTextType">
       <ion-item-group>
         <ion-item-divider>
           <ion-label>Choices</ion-label>
@@ -71,7 +71,7 @@
           <ion-item [formGroupName]="i.toString()">
             <ion-label position="stacked" color="primary">Choice {{i+1}}</ion-label>
             <ion-input type="text" formControlName="choice" class="form-control" required></ion-input>
-            <ion-button *ngIf="i > 1" slot="end" (click)="removeItem(i)">
+            <ion-button slot="end" (click)="removeItem(i)">
               <ion-icon name="remove"></ion-icon>
             </ion-button>
           </ion-item>
@@ -82,6 +82,9 @@
         </ion-button>
       </ion-item-group>
     </div>
+    <ng-template #chooseTextType>
+      {{removeChoices()}}
+    </ng-template>
 
     <p>
       <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Create Question</ion-button>

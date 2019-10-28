@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { ListPage } from './list.page';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxDatatableModule,
     RouterModule.forChild([
       {
         path: '',

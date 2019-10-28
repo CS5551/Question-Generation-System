@@ -4,39 +4,51 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      List of Questions
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="4">
         Question
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="ion-text-center">
         Subject
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="ion-text-center">
         Type
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="ion-text-center">
         Difficulty
       </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        Options
+      </ion-col>
     </ion-row>
-    <ion-row *ngFor="let item of items">
-      <ion-col size="6">
+    <ion-row *ngFor="let item of questions">
+      <ion-col size="4">
         {{item.question}}
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="ion-text-center">
         {{item.subject}}
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="ion-text-center">
         {{item.type}}
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="ion-text-center">
         {{item.difficulty}}
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-button size="small" [routerLink]="['/question-edit', item.id]" routerDirection="forward">
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button size="small" (click)="deleteQuestion(item)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
