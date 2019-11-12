@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Paper Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>Title: {{paper.title}}</p>
+  <p>Difficulty: {{paper.difficulty}}</p>
+  <p>List of Questions:</p>
+  <ion-grid>
+    <ion-row style="background-color: rgba(0, 0, 0, 0.1)">
+      <ion-col size="4">
+        Question
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        Subject
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        Type
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        Difficulty
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        Options
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of questions; let i = index;" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+      <ion-col size="4">
+        {{item.question}}
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        {{item.subject}}
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        {{item.type}}
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        {{item.difficulty}}
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-button size="small" (click)="deleteQuestion(item)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

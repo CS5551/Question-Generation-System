@@ -65,6 +65,19 @@ export class QuestionService {
     return questionsCollection.doc<Question>(id).valueChanges();
   }
 
+  getQuestionsOnPaper(ids: string[]) {
+    const list: Array<Question> = [];
+    if (ids) {
+      for (const item of ids) {
+        this.getQuestion(item).subscribe(res => {
+          res.id = item;
+          list.push(res);
+        });
+      }
+    }
+    return list;
+  }
+
   updateQuestion(value, questionId: string) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;

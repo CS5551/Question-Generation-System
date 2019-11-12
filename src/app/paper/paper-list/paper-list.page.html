@@ -37,9 +37,9 @@
         {{item.difficulty}}
       </ion-col>
       <ion-col size="2" class="ion-text-center">
-<!--        <ion-button size="small" [routerLink]="['/question-edit', item.id]" routerDirection="forward">-->
-<!--          <ion-icon name="create"></ion-icon>-->
-<!--        </ion-button>-->
+        <ion-button size="small" [routerLink]="['/paper-edit', item.id]" routerDirection="forward">
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
         <ion-button size="small" (click)="deletePaper(item)">
           <ion-icon name="trash"></ion-icon>
         </ion-button>

@@ -21,9 +21,10 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule'},
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'question-add', loadChildren: './question/question-add/question-add.module#QuestionAddPageModule', canActivate: [AuthGuard] },
-  { path: 'question-edit/:id', loadChildren: './question/question-edit/question-edit.module#QuestionEditPageModule' },
-  { path: 'paper-create', loadChildren: './paper/paper-create/paper-create.module#PaperCreatePageModule' },
-  { path: 'paper-list', loadChildren: './paper/paper-list/paper-list.module#PaperListPageModule' },
+  { path: 'question-edit/:id', loadChildren: './question/question-edit/question-edit.module#QuestionEditPageModule' , canActivate: [AuthGuard] },
+  { path: 'paper-create', loadChildren: './paper/paper-create/paper-create.module#PaperCreatePageModule', canActivate: [AuthGuard] },
+  { path: 'paper-list', loadChildren: './paper/paper-list/paper-list.module#PaperListPageModule', canActivate: [AuthGuard]  },
+  { path: 'paper-edit/:id', loadChildren: './paper/paper-edit/paper-edit.module#PaperEditPageModule' },
 
 ];
 

@@ -61,6 +61,7 @@ export class PaperCreatePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    console.log("Sub")
     this.questionsSubscr = this.questionService.getQuestions().subscribe(res => {
       if (res.length !== 0) {
         this.questions = res;
@@ -69,6 +70,7 @@ export class PaperCreatePage implements OnInit {
   }
 
   ionViewWillLeave() {
+    console.log("Unsub")
     this.questionsSubscr.unsubscribe();
   }
 
@@ -87,8 +89,7 @@ export class PaperCreatePage implements OnInit {
 
     shuffleInPlace(this.questions);
     console.log(this.questions);
-
-    if (value.numQuestions < this.questions.length)
+    if (value.numQuestions <= this.questions.length)
     {
       let pattern = [];
       switch (value.difficulty) {
@@ -119,16 +120,16 @@ export class PaperCreatePage implements OnInit {
         }
 
         if (temp.length === value.numQuestions) {
-          value.questions = temp;
           break;
         }
       }
 
-      this.paperService.createPaper(value)
+      this.paperService.createPaper(value, temp)
       .then(res => {
         this.presentAlert('Success', 'Your paper has been created.');
         this.navCtrl.navigateBack('paper-list');
       }, err => {
+        console.log(err);
         this.presentAlert('Error', err.message);
       });
     } else {

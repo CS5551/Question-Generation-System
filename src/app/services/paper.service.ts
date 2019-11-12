@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/firestore";
 import * as firebase from "firebase/app";
 import {map} from "rxjs/operators";
-import {Question} from "./question.service";
 
 export interface Paper {
   id?: string;
@@ -19,7 +18,7 @@ export class PaperService {
 
   ) { }
 
-  createPaper(value) {
+  createPaper(value, questions) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
       const usersCollection = this.db.collection('users');
@@ -28,7 +27,7 @@ export class PaperService {
       papersCollection
       .add({
         title: value.title,
-        questions: value.questions,
+        questions: questions,
         difficulty: value.difficulty,
       })
       .then(
@@ -52,6 +51,14 @@ export class PaperService {
         });
       })
     );
+  }
+
+  getPaper(id: string) {
+    const currentUser = firebase.auth().currentUser;
+    const usersCollection = this.db.collection('users');
+    const papersCollection = usersCollection.doc(currentUser.uid).collection<Paper>('papers');
+
+    return papersCollection.doc<Paper>(id).valueChanges();
   }
 
   deletePaper(paperId) {
