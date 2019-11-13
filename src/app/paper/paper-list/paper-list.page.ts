@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
-import {AlertController} from "@ionic/angular";
-import {PaperService} from "../../services/paper.service";
+import {Subscription} from 'rxjs';
+import {AlertController} from '@ionic/angular';
+import {PaperService} from '../../services/paper.service';
 
 @Component({
   selector: 'app-paper-list',
@@ -44,7 +44,7 @@ export class PaperListPage implements OnInit {
     this.papersSubscr.unsubscribe();
   }
 
-  async deletePaper(paper: any){
+  async deletePaper(paper: any) {
     const prompt = await this.alertController.create({
       header: 'Delete',
       message: 'Are you sure you want to delete the paper?',

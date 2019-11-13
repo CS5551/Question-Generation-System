@@ -8,11 +8,16 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import * as firebase from "firebase";
-import {environment} from "../environments/environment";
-import {AngularFireModule} from "@angular/fire";
-import {AngularFirestoreModule} from "@angular/fire/firestore";
-import {AuthService} from "./services/auth.service";
+import * as firebase from 'firebase';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AuthService} from './services/auth.service';
+import { Camera } from '@ionic-native/camera/ngx';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NgProgressModule } from '@ngx-progressbar/core';
+
 
 firebase.initializeApp(environment.firebase);
 
@@ -22,6 +27,7 @@ firebase.initializeApp(environment.firebase);
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    NgProgressModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -30,7 +36,10 @@ firebase.initializeApp(environment.firebase);
     StatusBar,
     SplashScreen,
     AuthService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    Camera,
+    NativeStorage,
+    TextToSpeech,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,7 @@
 {
   "name": "Question-Generation-System",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

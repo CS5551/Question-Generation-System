@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from "./services/auth.guard";
+import {AuthGuard} from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'paper-create', loadChildren: './paper/paper-create/paper-create.module#PaperCreatePageModule', canActivate: [AuthGuard] },
   { path: 'paper-list', loadChildren: './paper/paper-list/paper-list.module#PaperListPageModule', canActivate: [AuthGuard]  },
   { path: 'paper-edit/:id', loadChildren: './paper/paper-edit/paper-edit.module#PaperEditPageModule' },
+  { path: 'ocr', loadChildren: './ocr/ocr.module#OcrPageModule' },
+
 
 ];
 
