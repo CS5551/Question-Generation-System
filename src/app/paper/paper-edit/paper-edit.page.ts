@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
-import {Question, QuestionService} from "../../services/question.service";
-import {AlertController} from "@ionic/angular";
-import {ActivatedRoute} from "@angular/router";
-import {Paper, PaperService} from "../../services/paper.service";
+import {Subscription} from 'rxjs';
+import {Question, QuestionService} from '../../services/question.service';
+import {AlertController} from '@ionic/angular';
+import {ActivatedRoute} from '@angular/router';
+import {Paper, PaperService} from '../../services/paper.service';
 
 @Component({
   selector: 'app-paper-edit',

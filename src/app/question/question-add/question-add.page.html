@@ -1,13 +1,13 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Create Question</ion-title>
+    <ion-title color="secondary" class="tt"><b>Create Question</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content color="success" class="ion-padding">
   <form class="form" [formGroup]="validations_form" (ngSubmit)="createQuestion(validations_form.value)">
 
     <ion-item>
