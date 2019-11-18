@@ -17,6 +17,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { NgProgressModule } from '@ngx-progressbar/core';
+
+
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
