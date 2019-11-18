@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content  class="ion-padding">
+  <ion-button (click)="createPdf()">Create PDF</ion-button>
+    <ion-button (click)="downloadPdf()" color="secondary" [disabled]="!pdfObj">Download PDF</ion-button>
   <p>Title: {{paper.title}}</p>
   <p>Difficulty: {{paper.difficulty}}</p>
   <p>List of Questions:</p>
