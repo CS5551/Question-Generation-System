@@ -16,7 +16,7 @@ export class OcrPage implements OnInit {
   constructor(public navCtrl: NavController,
               private camera: Camera,
               private actionSheetCtrl: ActionSheetController,
-              public progress: NgProgress
+              public progress: NgProgress,
               ) { }
   getPicture(sourceType: PictureSourceType) {
     this.camera.getPicture({
