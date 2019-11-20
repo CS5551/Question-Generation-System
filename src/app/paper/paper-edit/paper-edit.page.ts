@@ -100,12 +100,12 @@ export class PaperEditPage implements OnInit {
       }
     }
     this.pdfObj = pdfMake.createPdf(docDefinition);
-
   }
+
   downloadPdf() {
     if (this.plt.is('cordova')) {
       this.pdfObj.getBuffer((buffer) => {
-        var blob = new Blob([buffer], { type: 'application/pdf' });
+        const blob = new Blob([buffer], { type: 'application/pdf' });
 
         // Save the PDF to the data Directory of our App
         this.file.writeFile(this.file.dataDirectory, 'Questionpaper.pdf', blob, { replace: true }).then(fileEntry => {

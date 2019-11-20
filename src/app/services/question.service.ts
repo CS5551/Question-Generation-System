@@ -10,6 +10,7 @@ export interface Question {
   difficulty: any;
   subject: string;
   choices: Array<any>;
+  isChecked?: boolean;
 }
 
 @Injectable({
@@ -68,7 +69,7 @@ export class QuestionService {
   getQuestionsOnPaper(ids: string[]) {
     const list: Array<Question> = [];
     if (ids) {
-      for (const item of ids) {
+      for (let item of ids) {
         this.getQuestion(item).subscribe(res => {
           res.id = item;
           list.push(res);

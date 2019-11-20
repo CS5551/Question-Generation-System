@@ -19,6 +19,8 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import {AngularFireStorageModule, StorageBucket} from "@angular/fire/storage";
+import {ModalListPageModule} from "./modal/modal-list/modal-list.module";
 
 firebase.initializeApp(environment.firebase);
 
@@ -32,6 +34,8 @@ firebase.initializeApp(environment.firebase);
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
+    ModalListPageModule,
   ],
   providers: [
     StatusBar,
@@ -42,6 +46,7 @@ firebase.initializeApp(environment.firebase);
     TextToSpeech,
     File,
     FileOpener,
+    { provide: StorageBucket, useValue: 'gs://question-generation-system.appspot.com' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
