@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -18,6 +20,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { NgProgressModule } from '@ngx-progressbar/core';
+import {identifierModuleUrl} from '@angular/compiler';
 
 
 firebase.initializeApp(environment.firebase);
@@ -36,9 +39,11 @@ firebase.initializeApp(environment.firebase);
   providers: [
     StatusBar,
     SplashScreen,
+      FileOpener,
     AuthService,
       OCR,
     Camera,
+      File,
     NativeStorage,
     TextToSpeech,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

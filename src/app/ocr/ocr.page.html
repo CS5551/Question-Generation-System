@@ -11,7 +11,7 @@
   <ng-progress [min]="0" [max]="1"></ng-progress>
 
   <button  (click)="selectSource()">Select Image</button>
-  <button  (click)="recongnizeImage()" >Recognize Image</button>
+  <button  (click)="recongnizeImage()" [disabled]="!selectedImage">Recognize Image</button>
 
   <img [src]="selectedImage" *ngIf="selectedImage">
 
