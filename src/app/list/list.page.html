@@ -12,7 +12,8 @@
 
 
 <ion-content class="ion-padding">
-  <ion-input type="file" (change)="importQuestions($event)" accept=".json"></ion-input>
+  <input type="file" #fileInput (click)="reset()" (change)="importQuestions($event)" accept=".json">
+  <br>
   <ion-button (click)="exportQuestions()">Export Questions</ion-button>
 <!--  <ion-button (click)="deleteQuestions()">Delete Questions</ion-button>-->
 <!--  <ion-button (click)="exportQuestions()">Questions</ion-button>-->

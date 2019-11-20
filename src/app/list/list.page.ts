@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Subscription} from "rxjs";
 import {Question, QuestionService} from "../services/question.service";
 import {AlertController, ModalController} from "@ionic/angular";
@@ -14,6 +14,8 @@ export class ListPage implements OnInit {
   private questionsSubscr: Subscription;
   questions = [];
   selectAllChecked = false;
+
+  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
 
   constructor(private questionService: QuestionService,
               private alertController: AlertController,
@@ -152,5 +154,9 @@ export class ListPage implements OnInit {
     } else {
       this.questions.map(item => item.isChecked = false);
     }
+  }
+
+  reset() {
+    this.fileInput.nativeElement.value = '';
   }
 }
