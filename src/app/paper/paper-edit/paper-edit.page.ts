@@ -58,6 +58,7 @@ export class PaperEditPage implements OnInit {
     if (this.paperId) {
       this.paperSubscr = this.paperService.getPaper(this.paperId).subscribe(res => {
         this.paper = res;
+        console.log(this.paper);
         this.questions = this.questionService.getQuestionsOnPaper(this.paper.questions);
       });
     }

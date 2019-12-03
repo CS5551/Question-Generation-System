@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Subscription} from "rxjs";
 import {Question, QuestionService} from "../services/question.service";
-import {AlertController, ModalController} from "@ionic/angular";
+import {AlertController, ModalController, Platform} from "@ionic/angular";
 import { saveAs } from 'file-saver';
 import {ModalListPage} from "../modal/modal-list/modal-list.page";
 
@@ -20,6 +20,7 @@ export class ListPage implements OnInit {
   constructor(private questionService: QuestionService,
               private alertController: AlertController,
               private modalController: ModalController,
+              private plt: Platform,
   ) {
 
   }
@@ -41,6 +42,8 @@ export class ListPage implements OnInit {
     this.questionsSubscr = this.questionService.getQuestions().subscribe(res => {
       if (res.length !== 0) {
         this.questions = res;
+      } else {
+        this.questions = [];
       }
     });
   }

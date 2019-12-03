@@ -36,6 +36,8 @@ export class PaperListPage implements OnInit {
     this.papersSubscr = this.paperService.getPapers().subscribe(res => {
       if (res.length !== 0) {
         this.papers = res;
+      } else {
+        this.papers = [];
       }
     });
   }

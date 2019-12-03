@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="secondary" class="tt"><b>Generate Question</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="success" class="ion-padding">
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="generateQuestions(validations_form.value)">
+    <ion-item>
+      <ion-label position="stacked" color="primary">Subject</ion-label>
+      <ion-input type="text" formControlName="subject" class="form-control" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.subject">
+        <div class="error-message" *ngIf="validations_form.get('subject').hasError(validation.type) && (validations_form.get('subject').dirty || validations_form.get('subject').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Text</ion-label>
+      <ion-textarea type="text" rows="10" formControlName="text" class="form-control" required></ion-textarea>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.text">
+        <div class="error-message" *ngIf="validations_form.get('text').hasError(validation.type) && (validations_form.get('text').dirty || validations_form.get('text').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <p>
+      <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Generate</ion-button>
+    </p>
+  </form>
+</ion-content>

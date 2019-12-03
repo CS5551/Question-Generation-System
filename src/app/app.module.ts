@@ -23,7 +23,8 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import {AngularFireStorageModule, StorageBucket} from "@angular/fire/storage";
 import {ModalListPageModule} from "./modal/modal-list/modal-list.module";
 import {identifierModuleUrl} from '@angular/compiler';
-
+import { HttpClientModule } from '@angular/common/http';
+import {ModalGenerateListPageModule} from "./modal/modal-generate-list/modal-generate-list.module";
 
 firebase.initializeApp(environment.firebase);
 
@@ -39,6 +40,8 @@ firebase.initializeApp(environment.firebase);
     AngularFirestoreModule,
     AngularFireStorageModule,
     ModalListPageModule,
+    ModalGenerateListPageModule,
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

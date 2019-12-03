@@ -26,6 +26,8 @@ const routes: Routes = [
   { path: 'paper-list', loadChildren: './paper/paper-list/paper-list.module#PaperListPageModule', canActivate: [AuthGuard]  },
   { path: 'paper-edit/:id', loadChildren: './paper/paper-edit/paper-edit.module#PaperEditPageModule' },
   { path: 'ocr', loadChildren: './ocr/ocr.module#OcrPageModule' },  { path: 'modal-list', loadChildren: './modal/modal-list/modal-list.module#ModalListPageModule' },
+  { path: 'question-parse', loadChildren: './question/question-parse/question-parse.module#QuestionParsePageModule' },
+  { path: 'modal-generate-list', loadChildren: './modal/modal-generate-list/modal-generate-list.module#ModalGenerateListPageModule' },
 
 
 

@@ -12,10 +12,10 @@
 
 
 <ion-content class="ion-padding">
-  <input type="file" #fileInput (click)="reset()" (change)="importQuestions($event)" accept=".json">
+  <input *ngIf="!plt.is('cordova')" type="file" #fileInput (click)="reset()" (change)="importQuestions($event)" accept=".json">
   <br>
-  <ion-button (click)="exportQuestions()">Export Questions</ion-button>
-<!--  <ion-button (click)="deleteQuestions()">Delete Questions</ion-button>-->
+  <ion-button *ngIf="!plt.is('cordova')" (click)="exportQuestions()">Export Questions</ion-button>
+<!--  <ion-button (click)="generateQuestions()">Generate Questions</ion-button>-->
 <!--  <ion-button (click)="exportQuestions()">Questions</ion-button>-->
   <ion-grid>
     <ion-row style="background-color: rgba(0, 0, 0, 0.1)">
@@ -42,19 +42,19 @@
 <!--      <ion-col size="1" class="ion-text-center">-->
 <!--        <ion-checkbox [(ngModel)]="item.isChecked"></ion-checkbox>-->
 <!--      </ion-col>-->
-      <ion-col size="4">
+      <ion-col *ngIf="item" size="4">
         {{item.question}}
       </ion-col>
-      <ion-col size="2" class="ion-text-center">
+      <ion-col *ngIf="item" size="2" class="ion-text-center">
         {{item.subject}}
       </ion-col>
-      <ion-col size="2" class="ion-text-center">
+      <ion-col *ngIf="item" size="2" class="ion-text-center">
         {{item.type}}
       </ion-col>
-      <ion-col size="2" class="ion-text-center">
+      <ion-col *ngIf="item" size="2" class="ion-text-center">
         {{item.difficulty}}
       </ion-col>
-      <ion-col size="2" class="ion-text-center">
+      <ion-col *ngIf="item" size="2" class="ion-text-center">
         <ion-button size="small" [routerLink]="['/question-edit', item.id]" routerDirection="forward">
           <ion-icon name="create"></ion-icon>
         </ion-button>
