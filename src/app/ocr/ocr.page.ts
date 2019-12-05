@@ -60,27 +60,27 @@ export class OcrPage implements OnInit {
   ngOnInit() {
   }
 
-  recognizeImage() {
-    this.ocr.recText(OCRSourceType.NORMFILEURL, "assets/testocr.png")
-        .then((res: OCRResult) => this.imageText = JSON.stringify(res))
-        .catch((error: any) => console.error(error));
-  }
-
   // recognizeImage() {
-  //   Tesseract.recognize(this.selectedImage)
-  //       .progress(message => {
-  //         if (message.status === 'recognizing text') {
-  //           this.progress.set(message.progress);
-  //         }
-  //       })
-  //       .catch(err => console.error(err))
-  //       .then(result => {
-  //         this.imageText = result.text;
-  //       })
-  //       .finally(resultOrError => {
-  //         this.progress.complete();
-  //       });
+  //   this.ocr.recText(OCRSourceType.NORMFILEURL, "assets/testocr.png")
+  //       .then((res: OCRResult) => this.imageText = JSON.stringify(res))
+  //       .catch((error: any) => console.error(error));
   // }
+
+  recognizeImage() {
+    Tesseract.recognize(this.selectedImage)
+        .progress(message => {
+          if (message.status === 'recognizing text') {
+            this.progress.set(message.progress);
+          }
+        })
+        .catch(err => console.error(err))
+        .then(result => {
+          this.imageText = result.text;
+        })
+        .finally(resultOrError => {
+          this.progress.complete();
+        });
+  }
 
 
 

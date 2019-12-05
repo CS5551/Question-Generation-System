@@ -113,7 +113,7 @@ export class PaperCreatePage implements OnInit {
 
       for (let i of pattern) {
         for (let question of this.questions) {
-          if (temp.length <= value.numQuestions) {
+          if (temp.length < value.numQuestions) {
             if (question.difficulty === i)
               temp.push(question.id);
           }

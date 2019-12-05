@@ -21,7 +21,7 @@ export class ModalGenerateListPage implements OnInit {
       const question = {
         question: item,
         subject: this.navParams.data.paramSubject,
-        type: 'text',
+        type: 'Text',
         difficulty: 1,
         choices: [],
       };

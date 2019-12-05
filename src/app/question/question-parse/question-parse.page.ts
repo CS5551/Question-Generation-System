@@ -83,6 +83,7 @@ export class QuestionParsePage implements OnInit {
             console.log(err);
           });
         }
+        this.navCtrl.navigateForward('list');
       }
     });
 

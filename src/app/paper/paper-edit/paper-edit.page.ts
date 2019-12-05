@@ -77,6 +77,11 @@ export class PaperEditPage implements OnInit {
 
     for (let i = 0; i < this.questions.length; i++) {
       content.push({ text: (i + 1) + '. ' + this.questions[i].question, style: 'question' });
+      if (this.questions[i].type === 'Choice') {
+        for (let j = 0; j < this.questions[i].choices.length; j++){
+          content.push({ text: (j + 1) + '. ' + this.questions[i].choices[j].choice, style: 'choice' });
+        }
+      }
     }
 
     const docDefinition = {
@@ -97,6 +102,10 @@ export class PaperEditPage implements OnInit {
         question: {
           fontSize: 14,
           margin: [0, 15, 0, 0]
+        },
+        choice: {
+          fontSize: 12,
+          margin: [15, 5, 0, 0]
         },
       }
     }
